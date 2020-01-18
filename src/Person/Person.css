@@ -7,11 +7,17 @@
     text-align: center;
 }
 
-.delete-person{
+.deletePerson{
     width: 20%;
     padding-top: 8px;
     padding-bottom: 8px;
     background: red;
     border-radius: 16px;
     color: white;
+}
+
+@media (min-width: 500px) {
+    .Person{
+        width: 450px;
+    }
 }

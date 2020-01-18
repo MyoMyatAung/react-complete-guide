@@ -1,5 +1,5 @@
 import React from 'react';
-import './App.css';
+import classes from './App.css';
 import Person from './Person/Person';
 
 class App extends React.Component{
@@ -44,18 +44,8 @@ class App extends React.Component{
 
   render(){
 
-    const style = {
-      backgroundColor : 'green',
-      color : 'white',
-      font : 'inherits',
-      border : '1px solid green',
-      boxShadow : '0 2px 3px lightblue',
-      cursor : 'pointer',
-      padding : '8px',
-      borderRadius : '4px',
-    };
-
     let person = null;
+    let btnClass = '';
 
     if (this.state.showPerson){
       person = (
@@ -69,26 +59,25 @@ class App extends React.Component{
             })}
           </div>
       );
-      style.backgroundColor = 'blue';
-      style.border = '1px solid blue';
+      btnClass = classes.Red;
     }
 
-    let classes  = [];
+    let assignedClasses  = [];
 
     if (this.state.person.length <= 2){
-      classes.push('red');
+      assignedClasses.push(classes.red);
     }
     if (this.state.person.length <= 1){
-      classes.push('bold');
+      assignedClasses.push(classes.bold);
     }
 
     return(
-          <div className = 'App'>
-      	    <h1 className={classes}>This is React App</h1>
-            <p className={classes.join(' ')}>This is paragraph</p>
+          <div className = {classes.App}>
+      	    <h1 className={assignedClasses}>This is React App</h1>
+            <p className={assignedClasses.join(' ')}>This is paragraph</p>
             <button
-                 style={style}
-                 onClick={this.togglePersonHandler}>
+                className={btnClass}
+                onClick={this.togglePersonHandler}>
               Switch Name
             </button>
             {person}
