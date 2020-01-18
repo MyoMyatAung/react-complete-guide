@@ -9,7 +9,7 @@
   font-weight: bold;
 }
 
-.App button{
+.Button{
   border : 1px solid gray;
   border-radius: 4px;
   padding: 16px;
@@ -17,11 +17,11 @@
   color: white;
 }
 
-.App button:hover{
+.Button:hover{
   background: #cccccc;
 }
 
-.App button.Red{
+.Red{
   border : 1px solid gray;
   border-radius: 4px;
   padding: 16px;
@@ -29,6 +29,6 @@
   color: white;
 }
 
-.App button.Red:hover{
+.Red:hover{
   background: aquamarine;
 }

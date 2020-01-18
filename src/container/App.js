@@ -1,6 +1,6 @@
 import React from 'react';
 import classes from './App.css';
-import Person from './Person/Person';
+import Person from '../components/Persons/Person/Person';
 
 class App extends React.Component{
 
@@ -45,17 +45,17 @@ class App extends React.Component{
   render(){
 
     let person = null;
-    let btnClass = '';
+    let btnClass = classes.Button;
 
     if (this.state.showPerson){
       person = (
           <div>
             {this.state.person.map((person,index) =>{
               return <Person
-                  changed = {(event)=>{ this.nameChangeHandler(event,person.id)}}
-                  click={this.deletePersonHandler.bind(this,index)}
-                  key={index}
-                  person={person}/>
+                    changed = {(event)=>{ this.nameChangeHandler(event,person.id)}}
+                    click={this.deletePersonHandler.bind(this,index)}
+                    key={index}
+                    person={person}/>
             })}
           </div>
       );
