@@ -1,0 +1,17 @@
+.Person{
+    width: 60%;
+    margin : 16px auto;
+    border: 1px solid #eee;
+    box-shadow: 0 2px 3px #cccccc;
+    padding: 16px;
+    text-align: center;
+}
+
+.delete-person{
+    width: 20%;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    background: red;
+    border-radius: 16px;
+    color: white;
+}
