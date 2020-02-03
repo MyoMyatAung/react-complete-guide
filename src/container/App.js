@@ -1,17 +1,47 @@
 import React from 'react';
 import classes from './App.css';
-import Person from '../components/Persons/Person/Person';
+import Persons from "../components/Persons/Persons";
+import Cockpit from "../components/Cockpit/Cockpit";
+import withClass from "../hoc/withClass";
+import Aux from "../hoc/Auxiliary";
 
 class App extends React.Component{
 
+  constructor(props){
+    super(props);
+    console.log('[App.js] constructor');
+  }
   state = {
     person : [
       {id : 'asdf1',name : 'Villa Myo', age : 21},
       {id : 'asdf2',name : 'Myo Myat Aung', age : 22},
       {id : 'asdf3',name : 'Fonsi', age : 20}
     ],
-    showPerson : false
+    showPerson : false,
+    showCockpit : true,
   };
+
+  static getDerivedStateFromProps(props,state){
+    console.log('[App.js] getDerivedStateFromProps',props);
+    return state;
+  }
+
+  // componentWillMount(){
+  //   console.log('[App.js] componentWillMount');
+  // }
+
+  componentDidMount(){
+    console.log('[App.js] componentDidMount');
+  }
+
+  shouldComponentUpdate(nextProps,nextState){
+    console.log('[App.js] shouldComponentUpdate');
+    return true;
+  }
+
+  componentDidUpdate(){
+    console.log('[App.js] componentDidUpdate');
+  }
 
   togglePersonHandler = () => {
     this.setState({
@@ -39,52 +69,54 @@ class App extends React.Component{
     const persons = [...this.state.person];
     persons[personIndex] = person;
 
-    this.setState({person : persons});
+    this.setState((prevState,props)=>{
+      return {
+        person : persons
+      }
+    })
   };
+
+
 
   render(){
 
+    console.log('[App.js] render');
     let person = null;
-    let btnClass = classes.Button;
+
 
     if (this.state.showPerson){
       person = (
           <div>
-            {this.state.person.map((person,index) =>{
-              return <Person
-                    changed = {(event)=>{ this.nameChangeHandler(event,person.id)}}
-                    click={this.deletePersonHandler.bind(this,index)}
-                    key={index}
-                    person={person}/>
-            })}
+            <Persons
+                changed={this.nameChangeHandler}
+                click={this.deletePersonHandler}
+                persons={this.state.person}/>
           </div>
       );
-      btnClass = classes.Red;
+
     }
 
-    let assignedClasses  = [];
+    let cockpit = null;
 
-    if (this.state.person.length <= 2){
-      assignedClasses.push(classes.red);
-    }
-    if (this.state.person.length <= 1){
-      assignedClasses.push(classes.bold);
+    if (this.state.showCockpit){
+      cockpit = <Cockpit
+          title={this.props.appTitle}
+          persons={this.state.person}
+          toggle={this.togglePersonHandler}
+          showPerson={this.state.showPerson}
+      />;
     }
 
     return(
-          <div className = {classes.App}>
-      	    <h1 className={assignedClasses}>This is React App</h1>
-            <p className={assignedClasses.join(' ')}>This is paragraph</p>
+          <Aux>
             <button
-                className={btnClass}
-                onClick={this.togglePersonHandler}>
-              Switch Name
-            </button>
+                onClick={()=>{this.setState({showCockpit : !this.state.showCockpit})}}>Toggle Cockpit</button>
+            {cockpit}
             {person}
             <hr/>
-          </div>
+          </Aux>
     );
   }
 }
 
-export default App;
+export default withClass(App,classes.App);
